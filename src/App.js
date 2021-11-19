@@ -1,25 +1,11 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Camera from "./components/Camera";
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <section className="app">
+      <h1>Instablam</h1>
+      <Camera />
+    </section>
   );
 }
-
-export default App;

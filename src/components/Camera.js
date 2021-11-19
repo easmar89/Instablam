@@ -14,6 +14,15 @@ export default function Camera() {
       >
         Show camera
       </button>
+      <button
+        onClick={() => {
+          setTimeout(() => {
+            capturePhoto(camRef.current, photoRef.current);
+          }, 3000);
+        }}
+      >
+        Take photo
+      </button>
       <div className="photo">
         <canvas ref={photoRef}></canvas>
         <button>Close</button>
@@ -41,4 +50,15 @@ async function turnCameraOn(camElement) {
   } catch (error) {
     console.error(error);
   }
+}
+
+function capturePhoto(camElement, photoElement) {
+  const width = 400;
+  const height = 300;
+
+  photoElement.width = width;
+  photoElement.height = height;
+
+  let canvas = photoElement.getContext("2d");
+  canvas.drawImage(camElement, 0, 0, width, height);
 }

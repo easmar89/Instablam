@@ -3,5 +3,5 @@ self.addEventListener("install", (event) => {
 });
 
 self.addEventListener("fetch", (e) => {
-  console.log("Service worker fetching");
+  // console.log("Service worker fetching");
 });

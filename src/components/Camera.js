@@ -1,4 +1,5 @@
-import { userState, useHook, useRef } from "react";
+import { useRef } from "react";
+import Location from "./Location";
 
 export default function Camera() {
   let camRef = useRef(null);
@@ -25,6 +26,7 @@ export default function Camera() {
       </button>
       <div className="photo">
         <canvas ref={photoRef}></canvas>
+        <Location />
         <button>Close</button>
       </div>
     </div>

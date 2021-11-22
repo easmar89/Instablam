@@ -26,16 +26,16 @@ export default function Location() {
 
   return (
     <div className="info">
-      <p className="date">{displayDate()}</p>
+      <p className="date">{new Date().toLocaleString()}</p>
       <p className="location">{location}</p>
     </div>
   );
 }
 
-function displayDate() {
-  let now = new Date();
-  let date = `${now.getDate()}-${now.getMonth() + 1}-${now.getFullYear()} `;
-  let time = `${now.getHours()}:${now.getMinutes()}`;
+// function displayDate() {
+//   let now = new Date();
+//   let date = `${now.getDate()}-${now.getMonth() + 1}-${now.getFullYear()} `;
+//   let time = `${now.getHours()}:${now.getMinutes()}`;
 
-  return date + time;
-}
+//   return date + time;
+// }

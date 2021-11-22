@@ -27,7 +27,7 @@ export default function Camera() {
       <div className="photo">
         <canvas ref={photoRef}></canvas>
         <Location />
-        <button>Close</button>
+        <button>save</button>
       </div>
     </div>
   );

@@ -20,22 +20,22 @@ async function installSW() {
   }
 
   const swRegistration = await navigator.serviceWorker.register("sw.js");
-  let serviceWorker;
+  // let serviceWorker;
 
-  if (swRegistration.installing) {
-    console.log("Resolved on installed: ", swRegistration);
-    serviceWorker = swRegistration.installing;
-  } else if (swRegistration.waiting) {
-    console.log("installed/waiting: ", swRegistration);
-    serviceWorker = swRegistration.waiting;
-  } else if (swRegistration.active) {
-    console.log("activated: ", swRegistration);
-    serviceWorker = swRegistration.active;
-  }
+  // if (swRegistration.installing) {
+  //   console.log("Resolved on installed: ", swRegistration);
+  //   serviceWorker = swRegistration.installing;
+  // } else if (swRegistration.waiting) {
+  //   console.log("installed/waiting: ", swRegistration);
+  //   serviceWorker = swRegistration.waiting;
+  // } else if (swRegistration.active) {
+  //   console.log("activated: ", swRegistration);
+  //   serviceWorker = swRegistration.active;
+  // }
 
-  serviceWorker.addEventListener("statechange", (e) => {
-    console.log(e.target.state);
-  });
+  // serviceWorker.addEventListener("statechange", (e) => {
+  //   console.log(e.target.state);
+  // });
 }
 
 installSW();

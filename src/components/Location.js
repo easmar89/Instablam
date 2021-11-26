@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 
 export default function Location() {
   let [location, setLocation] = useState(null);
-  let [latitude, setLatitude] = useState(null);
-  let [longitude, setLongitude] = useState(null);
 
   // function getLocation() {
   //   if ("geolocation" in navigator) {

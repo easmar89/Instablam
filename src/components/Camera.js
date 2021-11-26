@@ -22,16 +22,20 @@ export default function Camera() {
     return city;
   }
 
-  useEffect(async () => {
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(getAddress);
-    } else {
-      console.log("Sorry, unable to access location");
+  useEffect(() => {
+    async function getPermissions() {
+      if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(getAddress);
+      } else {
+        console.log("Sorry, unable to access location");
+      }
+
+      Notification.requestPermission().then((permission) => {
+        if (permission === "granted") setAllowNotification(true);
+      });
     }
 
-    Notification.requestPermission().then((permission) => {
-      if (permission === "granted") setAllowNotification(true);
-    });
+    getPermissions();
   }, []);
 
   function switchCamera() {

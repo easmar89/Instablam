@@ -18,11 +18,6 @@ export default function Gallery() {
     setImages(update);
   }
 
-  // function downloadImage(image) {
-  //   let blob = image.image;
-  //   console.log(blob);
-  // }
-
   function ShowImages() {
     if (images) {
       return images.map((image, index) => {

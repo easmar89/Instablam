@@ -68,27 +68,30 @@ export default function Camera() {
       >
         Stop camera
       </button>
-      <button
-        onClick={() => {
-          switchCamera();
-        }}
-      >
-        Switch
-      </button>
-      <button
-        onClick={() => {
-          setTimeout(() => {
-            capturePhoto(
-              camRef.current,
-              photoRef.current,
-              setShowPhoto,
-              allowNotification
-            );
-          }, 3000);
-        }}
-      >
-        Take photo
-      </button>
+      <div>
+        <button
+          onClick={() => {
+            switchCamera();
+          }}
+        >
+          Switch
+        </button>
+        <button
+          onClick={() => {
+            setTimeout(() => {
+              capturePhoto(
+                camRef.current,
+                photoRef.current,
+                setShowPhoto,
+                allowNotification
+              );
+            }, 3000);
+          }}
+        >
+          Take photo
+        </button>
+      </div>
+
       <div className={"photo " + (showPhoto ? "showPhoto" : "")}>
         <canvas ref={photoRef}></canvas>
         <div ref={info} className="info">
@@ -120,7 +123,7 @@ async function turnCameraOn(camElement, mode) {
   }
   try {
     const constraints = {
-      video: { facingMode: mode, width: 400, height: 300 },
+      video: { facingMode: mode, width: 300, height: 400 },
     };
     const stream = await navigator.mediaDevices.getUserMedia(constraints);
     camElement.srcObject = stream;
@@ -139,8 +142,8 @@ function turnCameraOff(camElement) {
 }
 
 function capturePhoto(camElement, photoElement, showPhoto, notification) {
-  const width = 400;
-  const height = 300;
+  const width = 300;
+  const height = 400;
 
   photoElement.width = width;
   photoElement.height = height;

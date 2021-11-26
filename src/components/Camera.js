@@ -7,6 +7,7 @@ export default function Camera() {
   let [showPhoto, setShowPhoto] = useState(false);
   let [mode, setFacingMode] = useState("user");
   let [location, setLocation] = useState(null);
+  let [allowNotification, setAllowNotification] = useState(false);
 
   async function getAddress(pos) {
     let lat = pos.coords.latitude;
@@ -21,12 +22,16 @@ export default function Camera() {
     return city;
   }
 
-  useEffect(() => {
+  useEffect(async () => {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(getAddress);
     } else {
-      console.log("Sorry, GEOLOCATION is not supported on your system");
+      console.log("Sorry, unable to access location");
     }
+
+    Notification.requestPermission().then((permission) => {
+      if (permission === "granted") setAllowNotification(true);
+    });
   }, []);
 
   function switchCamera() {
@@ -69,7 +74,12 @@ export default function Camera() {
       <button
         onClick={() => {
           setTimeout(() => {
-            capturePhoto(camRef.current, photoRef.current, setShowPhoto);
+            capturePhoto(
+              camRef.current,
+              photoRef.current,
+              setShowPhoto,
+              allowNotification
+            );
           }, 3000);
         }}
       >
@@ -124,7 +134,7 @@ function turnCameraOff(camElement) {
   camElement.srcObject = null;
 }
 
-function capturePhoto(camElement, photoElement, showPhoto) {
+function capturePhoto(camElement, photoElement, showPhoto, notification) {
   const width = 400;
   const height = 300;
 
@@ -134,6 +144,13 @@ function capturePhoto(camElement, photoElement, showPhoto) {
   let canvas = photoElement.getContext("2d");
   canvas.drawImage(camElement, 0, 0, width, height);
   showPhoto(true);
+  if (notification) showNotification();
+}
+
+function showNotification() {
+  const notification = new Notification("Note:", {
+    body: "Your photo has been taken!",
+  });
 }
 
 function closePhoto(photoElement, showPhoto) {

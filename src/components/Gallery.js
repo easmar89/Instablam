@@ -18,12 +18,17 @@ export default function Gallery() {
     setImages(update);
   }
 
+  // function downloadImage(image) {
+  //   let blob = image.image;
+  //   console.log(blob);
+  // }
+
   function ShowImages() {
     if (images) {
       return images.map((image, index) => {
         return (
           <div key={index} className="image">
-            <img src={image.image} />
+            <img src={image.image} alt="image" />
             <p>{image.date}</p>
             <p>{image.city}</p>
             <button
@@ -33,7 +38,9 @@ export default function Gallery() {
             >
               Delete
             </button>
-            <button>Download</button>
+            <a href={image.image} download>
+              <button>Download</button>
+            </a>
           </div>
         );
       });

@@ -20,6 +20,7 @@ self.addEventListener("fetch", (e) => {
   // console.log(e.request);
   e.respondWith(
     fetch(e.request).catch(() => {
+      console.log(e.request);
       caches.match(e.request);
     })
   );

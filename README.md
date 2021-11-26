@@ -5,7 +5,7 @@ _Link:_ https://instablam-cam.netlify.com
 **_Instablam_** is a web application that uses your computer/mobile camera to take photos and save them in a gallery, along with some additional information such as when it was taken, and where.
 You can then view, download or delete the photos from the gallery, even when using the app offline, which provides an experience similar to native applications that people download from apple store or google store.
 
-### N.B: Not all functionalities are supported on Iphone yet, thus it's better to try this app on your computer, or from an adnroid device.
+### N.B: Not all functionalities are supported on Iphone yet, thus it's better to try this app on your computer, or from an android device.
 
 <br>
 <br>

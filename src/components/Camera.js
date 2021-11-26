@@ -79,7 +79,7 @@ export default function Camera() {
         <canvas ref={photoRef}></canvas>
         <div ref={info} className="info">
           <p className="date">{new Date().toLocaleString()}</p>
-          <p className="location">{location}</p>
+          <p className="location">{location || "unknown"}</p>
         </div>
         <button
           onClick={() => {
@@ -152,13 +152,15 @@ function saveImage(photo, information) {
   let date = information.current.children[0].innerText;
   let city = information.current.children[1].innerText;
   let image = photo.toDataURL("image/jpeg");
+  let id = Date.now();
 
   if (localStorage.getItem("images")) {
     let gallery = JSON.parse(localStorage.getItem("images"));
-    gallery.push({ date, city, image });
+    gallery.push({ id, date, city, image });
     localStorage.setItem("images", JSON.stringify(gallery));
   } else {
     let obj = {
+      id,
       date,
       city,
       image,

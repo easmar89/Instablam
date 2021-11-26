@@ -9,13 +9,30 @@ export default function Gallery() {
     setImages(image);
   }, []);
 
+  function deleteImage(id) {
+    let gallery = JSON.parse(localStorage.getItem("images"));
+    let update = gallery.filter((img) => img.id !== id);
+    console.log(update);
+    localStorage.setItem("images", JSON.stringify(update));
+    // console.log(updated);
+    setImages(update);
+  }
+
   function ShowImages() {
     if (images) {
       return images.map((image, index) => {
         return (
           <div key={index} className="image">
-            <img src={image} />
-            <button>Delete</button>
+            <img src={image.image} />
+            <p>{image.date}</p>
+            <p>{image.city}</p>
+            <button
+              onClick={() => {
+                deleteImage(image.id);
+              }}
+            >
+              Delete
+            </button>
             <button>Download</button>
           </div>
         );

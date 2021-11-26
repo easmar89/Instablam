@@ -155,6 +155,8 @@ function showNotification() {
   const notification = new Notification("Note:", {
     body: "Your photo has been taken!",
   });
+
+  return notification;
 }
 
 function closePhoto(photoElement, showPhoto) {

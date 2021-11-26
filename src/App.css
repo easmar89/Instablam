@@ -42,8 +42,8 @@ nav a {
 }
 
 .camera-container video {
-  width: 400px;
-  height: 300px;
+  width: 600px;
+  height: 450px;
   background-color: gray;
   display: block;
   margin-bottom: 1rem;

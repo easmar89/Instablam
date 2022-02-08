@@ -1,10 +1,7 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "./Navbar";
 
 export default function Gallery() {
-  let defaultImage1 = useRef(null);
-  let defaultImage2 = useRef(null);
-
   const [images, setImages] = useState([]);
 
   useEffect(() => {
@@ -15,7 +12,6 @@ export default function Gallery() {
   function deleteImage(id) {
     let gallery = JSON.parse(localStorage.getItem("images"));
     let update = gallery.filter((img) => img.id !== id);
-    console.log(update);
     localStorage.setItem("images", JSON.stringify(update));
     setImages(update);
   }
@@ -25,7 +21,7 @@ export default function Gallery() {
       return images.map((image, index) => {
         return (
           <div key={index} className="image">
-            <img src={image.image} alt={`image${index}`} />
+            <img src={image.image} alt={`${index}`} />
             <p>{image.date}</p>
             <p>{image.city}</p>
             <button
@@ -50,17 +46,9 @@ export default function Gallery() {
       <div className="gallery">
         <h1>Instablam</h1>
         <Navbar />
-        <img
-          ref={defaultImage1}
-          src="./images/776-400x300.jpg"
-          alt="random image"
-        />
-        <img
-          ref={defaultImage2}
-          src="./images/photo-1635273439931-07f24478bec5.jpeg"
-          alt="random image"
-        />
-        <ShowImages />
+        <div className="images-container">
+          <ShowImages />
+        </div>
       </div>
     </>
   );

@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export default function Camera() {
   let camRef = useRef(null);
@@ -52,68 +53,71 @@ export default function Camera() {
   }
 
   return (
-    <div className="camera-container">
-      <video ref={camRef}></video>
-      <button
-        onClick={() => {
-          turnCameraOn(camRef.current, mode);
-        }}
-      >
-        Show camera
-      </button>
-      <button
-        onClick={() => {
-          turnCameraOff(camRef.current);
-        }}
-      >
-        Stop camera
-      </button>
-      <div>
+    <>
+      <nav>
+        <Link to="/">Home</Link>
+        <Link onClick={() => turnCameraOff(camRef.current)} to="/gallery">
+          Gallery
+        </Link>
+      </nav>
+      <div className="camera-container">
+        <video ref={camRef}></video>
         <button
           onClick={() => {
-            switchCamera();
+            turnCameraOn(camRef.current, mode);
           }}
         >
-          Switch
+          Show camera
         </button>
         <button
           onClick={() => {
-            setTimeout(() => {
-              capturePhoto(
-                camRef.current,
-                photoRef.current,
-                setShowPhoto,
-                allowNotification
-              );
-            }, 3000);
+            turnCameraOff(camRef.current);
           }}
         >
-          Take photo
+          Stop camera
         </button>
-      </div>
-
-      <div className={"photo " + (showPhoto ? "showPhoto" : "")}>
-        <canvas ref={photoRef}></canvas>
-        <div ref={info} className="info">
-          <p className="date">{new Date().toLocaleString()}</p>
-          <p className="location">{location || "unknown"}</p>
+        <div>
+          <button
+            onClick={() => {
+              switchCamera();
+            }}
+          >
+            Switch
+          </button>
+          <button
+            onClick={() => {
+              setTimeout(() => {
+                capturePhoto(camRef.current, photoRef.current, setShowPhoto, allowNotification);
+              }, 1000);
+            }}
+          >
+            Take photo
+          </button>
         </div>
-        <button
-          onClick={() => {
-            closePhoto(photoRef, setShowPhoto);
-          }}
-        >
-          Close
-        </button>
-        <button
-          onClick={() => {
-            saveImage(photoRef.current, info);
-          }}
-        >
-          Save
-        </button>
+
+        <div className={"photo " + (showPhoto ? "showPhoto" : "")}>
+          <canvas ref={photoRef}></canvas>
+          <div ref={info} className="info">
+            <p className="date">{new Date().toLocaleString()}</p>
+            <p className="location">{location || "unknown"}</p>
+          </div>
+          <button
+            onClick={() => {
+              closePhoto(photoRef, setShowPhoto);
+            }}
+          >
+            Close
+          </button>
+          <button
+            onClick={() => {
+              saveImage(photoRef.current, info);
+            }}
+          >
+            Save
+          </button>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
@@ -122,23 +126,27 @@ async function turnCameraOn(camElement, mode) {
     return;
   }
   try {
-    const constraints = {
-      video: { facingMode: mode, width: 300, height: 400 },
-    };
-    const stream = await navigator.mediaDevices.getUserMedia(constraints);
-    camElement.srcObject = stream;
-    camElement.play();
+    if (!camElement.srcObject) {
+      const constraints = {
+        video: { facingMode: mode, width: 300, height: 400 },
+      };
+      const stream = await navigator.mediaDevices.getUserMedia(constraints);
+      camElement.srcObject = stream;
+      camElement.play();
+    }
   } catch (error) {
     console.error(error);
   }
 }
 
 function turnCameraOff(camElement) {
-  let tracks = camElement.srcObject.getTracks();
-  tracks.forEach((track) => {
-    track.stop();
-  });
-  camElement.srcObject = null;
+  if (camElement.srcObject) {
+    let tracks = camElement.srcObject.getTracks();
+    tracks.forEach((track) => {
+      track.stop();
+    });
+    camElement.srcObject = null;
+  }
 }
 
 function capturePhoto(camElement, photoElement, showPhoto, notification) {
@@ -164,12 +172,7 @@ function showNotification() {
 
 function closePhoto(photoElement, showPhoto) {
   let canvas = photoElement.current.getContext("2d");
-  canvas.clearRect(
-    0,
-    0,
-    photoElement.current.width,
-    photoElement.current.height
-  );
+  canvas.clearRect(0, 0, photoElement.current.width, photoElement.current.height);
 
   showPhoto(false);
 }

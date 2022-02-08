@@ -8,7 +8,6 @@ const cached_files = [
 ];
 
 self.addEventListener("install", (event) => {
-  console.log("from SW: install event");
   const preCache = async () => {
     const cache = await caches.open(CACHE_NAME);
     return cache.addAll(cached_files);
@@ -17,10 +16,8 @@ self.addEventListener("install", (event) => {
 });
 
 self.addEventListener("fetch", (e) => {
-  // console.log(e.request);
   e.respondWith(
     fetch(e.request).catch(() => {
-      console.log(e.request);
       caches.match(e.request);
     })
   );

@@ -3,8 +3,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from "./App";
 import Gallery from "./components/Gallery";
 
-// ReactDOM.render(<App />, document.getElementById("root"));
-
 ReactDOM.render(
   <BrowserRouter>
     <Routes>

@@ -5,7 +5,9 @@
 }
 
 body {
-  background-color: #004369;
+  background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+    url("./images/background.jpeg");
+  background-size: cover;
 }
 
 .app,
@@ -16,6 +18,13 @@ body {
   text-align: center;
   position: relative;
   min-height: 100vh;
+  background-color: rgb(12 15 23 / 65%);
+}
+
+@media screen and (max-width: 768px) {
+  .app {
+    width: auto;
+  }
 }
 
 h1 {
@@ -36,7 +45,7 @@ a {
 
 nav a {
   font-size: 1.5rem;
-  background-color: #db1f48;
+  background-color: #d32300;
   padding: 10px 16px;
   border-radius: 10px;
 }
@@ -44,7 +53,8 @@ nav a {
 .camera-container video {
   width: 300px;
   height: 400px;
-  background-color: gray;
+  background-color: rgba(136, 136, 136, 0.8);
+  border-radius: 10px;
   display: block;
   margin-bottom: 1rem;
   position: relative;
@@ -72,8 +82,28 @@ nav a {
 }
 
 button {
-  padding: 10px 16px;
-  background-color: #e5ddc8;
+  border: none;
+  padding: 10px 12px;
+  width: 100px;
+  height: 75px;
+  background-color: rgb(106 106 106 / 45%);
   margin: 5px 10px;
   font-weight: bold;
+  color: white;
+  border-radius: 20px;
+  outline: white;
+}
+
+.image {
+  color: white;
+  padding: 30px;
+  border-radius: 15px;
+  background-color: rgba(83, 83, 83, 0.425);
+  margin: 16px 24px;
+}
+
+.images-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
